@@ -1,110 +1,116 @@
-// =======================================
+// =========================================
 // HousingRental
-// JavaScript
-// =======================================
+// script.js
+// =========================================
 
-// Повідомлення після завантаження сторінки
-window.onload = function () {
+// Код виконується після повного завантаження сторінки
+document.addEventListener("DOMContentLoaded", function () {
+
     console.log("HousingRental успішно завантажено!");
-};
 
-// =======================================
-// Кнопка "Увійти"
-// =======================================
+    // -----------------------------
+    // Кнопка "Увійти"
+    // -----------------------------
 
-const loginButton = document.querySelector(".login-btn");
+    const loginButton = document.querySelector(".login-btn");
 
-if (loginButton) {
-    loginButton.addEventListener("click", function () {
-        alert("Функція входу буде реалізована на наступному етапі.");
+    if (loginButton) {
+        loginButton.addEventListener("click", function () {
+            alert("Сторінка входу буде додана пізніше.");
+        });
+    }
+
+    // -----------------------------
+    // Кнопка "Пошук"
+    // -----------------------------
+
+    const searchButton = document.querySelector(".search-box button");
+
+    if (searchButton) {
+
+        searchButton.addEventListener("click", function () {
+
+            const cityInput = document.querySelector(".search-box input[type='text']");
+
+            if (!cityInput) return;
+
+            const city = cityInput.value.trim();
+
+            if (city === "") {
+
+                alert("Введіть назву міста.");
+
+                cityInput.focus();
+
+                return;
+
+            }
+
+            alert("Виконується пошук житла у місті: " + city);
+
+        });
+
+    }
+
+    // -----------------------------
+    // Кнопки "Переглянути"
+    // -----------------------------
+
+    const buttons = document.querySelectorAll(".card button");
+
+    buttons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const card = this.closest(".card");
+
+            if (!card) return;
+
+            const title = card.querySelector("h3");
+
+            if (!title) return;
+
+            alert("Обрано:\n\n" + title.textContent);
+
+        });
+
     });
-}
 
-// =======================================
-// Кнопка "Пошук"
-// =======================================
+    // -----------------------------
+    // Анімація відгуків
+    // -----------------------------
 
-const searchButton = document.querySelector(".search-box button");
+    const reviews = document.querySelectorAll(".review");
 
-if (searchButton) {
+    reviews.forEach(function (review) {
 
-    searchButton.addEventListener("click", function () {
+        review.addEventListener("mouseenter", function () {
 
-        const city = document.querySelector(".search-box input[type='text']").value;
+            this.style.transform = "translateY(-5px)";
 
-        if (city === "") {
+        });
 
-            alert("Будь ласка, введіть назву міста.");
+        review.addEventListener("mouseleave", function () {
 
-        } else {
+            this.style.transform = "translateY(0)";
 
-            alert("Пошук житла у місті: " + city);
-
-        }
+        });
 
     });
 
-}
+    // -----------------------------
+    // Поточний рік у Footer
+    // -----------------------------
 
-// =======================================
-// Кнопки "Переглянути"
-// =======================================
+    const footer = document.querySelector("footer p");
 
-const apartmentButtons = document.querySelectorAll(".card button");
+    if (footer) {
 
-apartmentButtons.forEach(function(button){
+        footer.innerHTML =
+            "© " +
+            new Date().getFullYear() +
+            " HousingRental. Всі права захищені.";
 
-    button.addEventListener("click", function(){
-
-        const apartmentName =
-            this.parentElement.querySelector("h3").textContent;
-
-        alert("Відкриваємо сторінку:\n" + apartmentName);
-
-    });
+    }
 
 });
-
-// =======================================
-// Відгуки
-// =======================================
-
-const reviews = document.querySelectorAll(".review");
-
-reviews.forEach(function(review){
-
-    review.addEventListener("mouseenter", function(){
-
-        this.style.transform = "scale(1.03)";
-        this.style.transition = "0.3s";
-
-    });
-
-    review.addEventListener("mouseleave", function(){
-
-        this.style.transform = "scale(1)";
-
-    });
-
-});
-
-// =======================================
-// Footer
-// =======================================
-
-const footer = document.querySelector("footer p");
-
-const year = new Date().getFullYear();
-
-footer.innerHTML =
-    "© " + year + " HousingRental. Всі права захищені.";
-
-// =======================================
-// Інформація у консолі
-// =======================================
-
-console.log("--------------------------------");
-console.log("HousingRental");
-console.log("Практична робота");
-console.log("Версія 1.0");
-console.log("--------------------------------");
